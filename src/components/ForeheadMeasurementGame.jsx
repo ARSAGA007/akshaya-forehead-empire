@@ -43,9 +43,8 @@ export default function ForeheadMeasurementGame({ onCompleteLevel, onUpdateScore
   // Touch and Mouse dragging logic
   const handlePointerDown = (e) => {
     if (isScanning || measurementResult) return;
-    if (e.cancelable) e.preventDefault();
     setIsDragging(true);
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    const clientY = e.clientY;
     dragStartY.current = clientY;
     initialRulerY.current = rulerY;
     audioSystem.playClick();
@@ -53,8 +52,7 @@ export default function ForeheadMeasurementGame({ onCompleteLevel, onUpdateScore
 
   const handlePointerMove = (e) => {
     if (!isDragging || !containerRef.current) return;
-    if (e.cancelable) e.preventDefault();
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    const clientY = e.clientY;
     const deltaY = clientY - dragStartY.current;
     const containerHeight = containerRef.current.clientHeight;
     const deltaPercent = (deltaY / containerHeight) * 100;
@@ -70,6 +68,54 @@ export default function ForeheadMeasurementGame({ onCompleteLevel, onUpdateScore
   const handlePointerUp = () => {
     setIsDragging(false);
   };
+
+  // Non-passive touch listener to prevent mobile browser scroll/zoom jitter while dragging ruler
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    let isTouchActive = false;
+
+    const onTouchStart = (e) => {
+      if (isScanning || measurementResult) return;
+      if (e.cancelable) e.preventDefault();
+      isTouchActive = true;
+      const clientY = e.touches[0].clientY;
+      dragStartY.current = clientY;
+      initialRulerY.current = rulerY;
+      audioSystem.playClick();
+    };
+
+    const onTouchMove = (e) => {
+      if (!isTouchActive) return;
+      if (e.cancelable) e.preventDefault();
+      const clientY = e.touches[0].clientY;
+      const deltaY = clientY - dragStartY.current;
+      const containerHeight = container.clientHeight;
+      const deltaPercent = (deltaY / containerHeight) * 100;
+
+      let newY = Math.max(5, Math.min(75, initialRulerY.current + deltaPercent));
+      setRulerY(newY);
+
+      if (Math.abs(deltaY) % 20 < 4) {
+        audioSystem.playScanBeep();
+      }
+    };
+
+    const onTouchEnd = () => {
+      isTouchActive = false;
+    };
+
+    container.addEventListener('touchstart', onTouchStart, { passive: false });
+    container.addEventListener('touchmove', onTouchMove, { passive: false });
+    container.addEventListener('touchend', onTouchEnd, { passive: false });
+
+    return () => {
+      container.removeEventListener('touchstart', onTouchStart);
+      container.removeEventListener('touchmove', onTouchMove);
+      container.removeEventListener('touchend', onTouchEnd);
+    };
+  }, [isScanning, measurementResult, rulerY]);
 
   const handleStartMeasurement = () => {
     if (isScanning || measurementResult) return;
@@ -185,8 +231,6 @@ export default function ForeheadMeasurementGame({ onCompleteLevel, onUpdateScore
         className="lab-container"
         onMouseMove={handlePointerMove}
         onMouseUp={handlePointerUp}
-        onTouchMove={handlePointerMove}
-        onTouchEnd={handlePointerUp}
       >
         <img
           src="/assets/akshaya-closeup-1.jpg"
@@ -257,7 +301,6 @@ export default function ForeheadMeasurementGame({ onCompleteLevel, onUpdateScore
             boxShadow: isInsideTarget ? '0 0 20px rgba(34, 197, 94, 0.6)' : '0 6px 20px rgba(0,0,0,0.4)',
           }}
           onMouseDown={handlePointerDown}
-          onTouchStart={handlePointerDown}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <span style={{ fontSize: '0.9rem' }}>📏</span>

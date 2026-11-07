@@ -46,8 +46,7 @@ export default function LevelIndicator({
             ) : (
               <Icon size={13} color={isActive ? '#ff65a3' : '#d8b4fe'} />
             )}
-            <span className="level-chip-label-desktop">M{lvl.num}: {lvl.name}</span>
-            <span className="level-chip-label-mobile">M{lvl.num}: {lvl.shortName}</span>
+            <span>M{lvl.num}: {lvl.shortName}</span>
           </button>
         );
       })}

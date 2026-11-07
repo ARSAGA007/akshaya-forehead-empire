@@ -636,7 +636,7 @@ export default function ForeheadSpaceRescueGame({ onCompleteLevel, onUpdateScore
   const isDraggingRef = useRef(false);
 
   const moveShipToCoords = (clientX, clientY) => {
-    if (gameState !== 'playing' || !canvasRef.current) return;
+    if (gameStateRef.current !== 'playing' || !canvasRef.current) return;
     const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect();
     const scaleX = canvas.width / rect.width;
@@ -650,12 +650,26 @@ export default function ForeheadSpaceRescueGame({ onCompleteLevel, onUpdateScore
     ship.y = Math.max(15, Math.min(canvas.height - ship.height - 15, targetY - ship.height / 2));
   };
 
-  const handleCanvasTouchMove = (e) => {
-    if (e.cancelable) e.preventDefault();
-    if (e.touches && e.touches[0]) {
-      moveShipToCoords(e.touches[0].clientX, e.touches[0].clientY);
-    }
-  };
+  // Attach non-passive touch listeners directly to canvas so mobile browser NEVER scrolls or bounces page while dragging
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const handleTouch = (e) => {
+      if (e.cancelable) e.preventDefault();
+      if (e.touches && e.touches[0]) {
+        moveShipToCoords(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    };
+
+    canvas.addEventListener('touchstart', handleTouch, { passive: false });
+    canvas.addEventListener('touchmove', handleTouch, { passive: false });
+
+    return () => {
+      canvas.removeEventListener('touchstart', handleTouch);
+      canvas.removeEventListener('touchmove', handleTouch);
+    };
+  }, []);
 
   const handleCanvasMouseDown = (e) => {
     isDraggingRef.current = true;
@@ -769,7 +783,7 @@ export default function ForeheadSpaceRescueGame({ onCompleteLevel, onUpdateScore
           background: 'rgba(22, 10, 42, 0.92)',
           border: '1px solid rgba(255, 101, 163, 0.45)',
           borderRadius: '12px',
-          padding: '6px 14px',
+          padding: '6px 12px',
           marginBottom: '10px',
           display: 'flex',
           alignItems: 'center',
@@ -777,9 +791,23 @@ export default function ForeheadSpaceRescueGame({ onCompleteLevel, onUpdateScore
           fontSize: '0.78rem',
           color: '#fef08a',
           gap: '8px',
+          width: '100%',
+          boxSizing: 'border-box',
+          overflow: 'hidden',
         }}
       >
-        <span style={{ fontFamily: 'var(--font-retro)', fontSize: '0.64rem', letterSpacing: '0.5px' }}>
+        <span
+          style={{
+            fontFamily: 'var(--font-retro)',
+            fontSize: 'clamp(0.56rem, 1.8vw, 0.64rem)',
+            letterSpacing: '0.5px',
+            flex: 1,
+            minWidth: 0,
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+          }}
+        >
           📢 {notification}
         </span>
         {activePowerUpName && (
@@ -792,6 +820,7 @@ export default function ForeheadSpaceRescueGame({ onCompleteLevel, onUpdateScore
               fontSize: '0.62rem',
               fontFamily: 'var(--font-retro)',
               whiteSpace: 'nowrap',
+              flexShrink: 0,
               animation: 'wiggle 1s infinite',
             }}
           >
@@ -807,8 +836,6 @@ export default function ForeheadSpaceRescueGame({ onCompleteLevel, onUpdateScore
           width={520}
           height={560}
           className="satellite-canvas"
-          onTouchStart={handleCanvasTouchMove}
-          onTouchMove={handleCanvasTouchMove}
           onMouseDown={handleCanvasMouseDown}
           onMouseMove={handleCanvasMouseMove}
           onMouseUp={handleCanvasMouseUp}
@@ -939,8 +966,8 @@ export default function ForeheadSpaceRescueGame({ onCompleteLevel, onUpdateScore
           </button>
         ) : (
           <>
-            <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', marginBottom: '8px' }}>
-              Desktop: <kbd>W</kbd>/<kbd>A</kbd>/<kbd>S</kbd>/<kbd>D</kbd> or Arrows | Mobile: Drag on canvas or use D-Pad below
+            <div style={{ fontSize: '0.74rem', color: 'rgba(255,255,255,0.7)', marginBottom: '8px' }}>
+              🎮 Drag canvas, use D-Pad, or W/A/S/D keys
             </div>
 
             <div className="touch-dpad">

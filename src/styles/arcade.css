@@ -91,14 +91,6 @@
   color: #86efac;
 }
 
-.level-chip-label-mobile {
-  display: none;
-}
-
-.level-chip-label-desktop {
-  display: inline;
-}
-
 /* Welcome Screen Portrait Frame */
 .portrait-hero-wrapper {
   position: relative;
@@ -438,7 +430,7 @@
 }
 
 /* Mobile & Touch Specific Optimizations */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .arcade-header-bar {
     padding: 8px 12px;
     border-radius: 16px;
@@ -447,8 +439,10 @@
   }
 
   .arcade-card {
-    padding: 16px 10px;
+    padding: 14px 10px;
     border-radius: 20px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .level-strip {
@@ -460,6 +454,7 @@
     padding: 2px 2px 6px 2px;
     justify-content: flex-start;
     scrollbar-width: none;
+    width: 100%;
   }
 
   .level-strip::-webkit-scrollbar {
@@ -471,14 +466,6 @@
     font-size: 0.72rem;
     flex-shrink: 0;
     white-space: nowrap;
-  }
-
-  .level-chip-label-desktop {
-    display: none;
-  }
-
-  .level-chip-label-mobile {
-    display: inline;
   }
 
   .portrait-hero-wrapper {
@@ -494,20 +481,21 @@
 
   .lab-container {
     width: 100%;
-    max-width: 100%;
-    min-height: 420px;
-    height: 54vh;
-    aspect-ratio: auto;
+    max-width: 460px;
+    aspect-ratio: 3/4;
     border-radius: 18px;
+    height: auto;
+    min-height: 0;
   }
 
   .satellite-game-stage,
   .parking-game-stage {
     width: 100%;
-    max-width: 100%;
+    max-width: 460px;
     aspect-ratio: 4/5;
-    max-height: 54vh;
     border-radius: 18px;
+    height: auto;
+    max-height: none;
   }
 
   .level-dialogue-overlay {

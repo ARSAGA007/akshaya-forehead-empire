@@ -25,14 +25,17 @@
   user-select: none;
 }
 
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+}
+
 body {
   font-family: var(--font-body);
   background: radial-gradient(circle at 50% 10%, #2e1065 0%, #17072b 50%, #0b0217 100%);
   color: var(--text-light);
   min-height: 100vh;
-  min-height: 100dvh;
-  overflow-x: hidden;
-  position: relative;
 }
 
 /* Background floating ambient particles */
@@ -193,23 +196,25 @@ body {
 /* Responsive container */
 .game-container {
   max-width: 960px;
+  width: 100%;
   margin: 0 auto;
   padding: 16px;
   min-height: 100vh;
-  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   position: relative;
   z-index: 1;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .game-container {
-    padding: 12px 10px;
+    padding: 10px 8px;
   }
   .btn-arcade {
-    font-size: 1rem;
-    padding: 12px 20px;
+    font-size: 0.98rem;
+    padding: 11px 18px;
   }
 }
 

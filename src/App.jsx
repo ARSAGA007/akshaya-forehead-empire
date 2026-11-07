@@ -137,7 +137,7 @@ export default function App() {
         )}
 
         {/* Screen switcher */}
-        <main style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <main style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', width: '100%' }}>
           {currentScreen === 'welcome' && (
             <WelcomeScreen onStartChallenge={handleStartChallenge} />
           )}
