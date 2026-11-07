@@ -486,6 +486,7 @@ export default function BirthdayDeliveryDashGame({ onCompleteLevel, onUpdateScor
   };
 
   const handleCanvasTouchMove = (e) => {
+    if (e.cancelable) e.preventDefault();
     if (e.touches && e.touches[0]) {
       steerScooterToCoords(e.touches[0].clientX);
     }
@@ -707,7 +708,7 @@ export default function BirthdayDeliveryDashGame({ onCompleteLevel, onUpdateScor
           onMouseMove={handleCanvasMouseMove}
           onMouseUp={handleCanvasMouseUp}
           onMouseLeave={handleCanvasMouseUp}
-          style={{ cursor: 'grab' }}
+          style={{ cursor: 'grab', touchAction: 'none' }}
         />
 
         {/* Pause Overlay */}

@@ -43,6 +43,7 @@ export default function ForeheadMeasurementGame({ onCompleteLevel, onUpdateScore
   // Touch and Mouse dragging logic
   const handlePointerDown = (e) => {
     if (isScanning || measurementResult) return;
+    if (e.cancelable) e.preventDefault();
     setIsDragging(true);
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
     dragStartY.current = clientY;
@@ -52,6 +53,7 @@ export default function ForeheadMeasurementGame({ onCompleteLevel, onUpdateScore
 
   const handlePointerMove = (e) => {
     if (!isDragging || !containerRef.current) return;
+    if (e.cancelable) e.preventDefault();
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
     const deltaY = clientY - dragStartY.current;
     const containerHeight = containerRef.current.clientHeight;

@@ -188,6 +188,8 @@ export default function BirthdayVideoPlayer({ onVideoEnd }) {
           ref={videoRef}
           src="/assets/akshaya-secret-video.mp4"
           playsInline
+          webkit-playsinline="true"
+          preload="auto"
           muted
           loop
           onLoadedData={() => setIsLoading(false)}

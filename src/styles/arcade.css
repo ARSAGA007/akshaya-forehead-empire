@@ -415,3 +415,73 @@
   100% { transform: translateY(-160px) scale(1.2); opacity: 0; }
 }
 
+/* Mobile & Touch Specific Optimizations */
+@media (max-width: 600px) {
+  .arcade-header-bar {
+    padding: 8px 12px;
+    border-radius: 16px;
+    margin-bottom: 10px;
+    gap: 8px;
+  }
+
+  .arcade-card {
+    padding: 18px 12px;
+    border-radius: 20px;
+  }
+
+  .level-strip {
+    gap: 4px;
+    margin-bottom: 12px;
+  }
+
+  .level-step-chip {
+    padding: 4px 8px;
+    font-size: 0.72rem;
+  }
+
+  .portrait-hero-wrapper {
+    width: 170px;
+    height: 210px;
+    margin-bottom: 12px;
+  }
+
+  .crown-badge {
+    font-size: 2.2rem;
+    top: -24px;
+  }
+
+  .lab-container {
+    height: 380px;
+    max-width: 100%;
+    border-radius: 18px;
+  }
+
+  .satellite-game-stage,
+  .parking-game-stage {
+    max-width: 100%;
+    border-radius: 18px;
+  }
+
+  .touch-dpad {
+    grid-template-columns: repeat(3, 50px);
+    grid-template-rows: repeat(2, 50px);
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .dpad-btn {
+    font-size: 1.2rem;
+    border-radius: 12px;
+  }
+
+  .video-wrapper {
+    max-width: 100%;
+    border-radius: 20px;
+  }
+
+  .video-element {
+    max-height: 55vh;
+  }
+}
+
+

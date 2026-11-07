@@ -651,6 +651,7 @@ export default function ForeheadSpaceRescueGame({ onCompleteLevel, onUpdateScore
   };
 
   const handleCanvasTouchMove = (e) => {
+    if (e.cancelable) e.preventDefault();
     if (e.touches && e.touches[0]) {
       moveShipToCoords(e.touches[0].clientX, e.touches[0].clientY);
     }
@@ -812,7 +813,7 @@ export default function ForeheadSpaceRescueGame({ onCompleteLevel, onUpdateScore
           onMouseMove={handleCanvasMouseMove}
           onMouseUp={handleCanvasMouseUp}
           onMouseLeave={handleCanvasMouseUp}
-          style={{ cursor: 'grab' }}
+          style={{ cursor: 'grab', touchAction: 'none' }}
         />
 
         {/* Pause Overlay */}
