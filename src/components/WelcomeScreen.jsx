@@ -108,10 +108,14 @@ export default function WelcomeScreen({ onStartChallenge }) {
         </div>
       </div>
 
-      <div style={{ marginTop: '28px' }}>
-        <button className="btn-arcade" onClick={handleStart} style={{ padding: '16px 36px', fontSize: '1.25rem' }}>
+      <div style={{ marginTop: '24px' }}>
+        <button
+          className="btn-arcade"
+          onClick={handleStart}
+          style={{ padding: '14px 28px', fontSize: 'clamp(1.05rem, 3.5vw, 1.25rem)', width: '100%', maxWidth: '360px' }}
+        >
           <span>START THE CHALLENGE</span>
-          <span style={{ fontSize: '1.4rem' }}>🚀</span>
+          <span style={{ fontSize: '1.3rem' }}>🚀</span>
         </button>
       </div>
 

@@ -296,122 +296,152 @@ export default function ForeheadMeasurementGame({ onCompleteLevel, onUpdateScore
         {/* Result Overlay */}
         {measurementResult && (
           <div className="level-dialogue-overlay">
-            {measurementResult.success ? (
-              <>
-                <div style={{ fontSize: '3rem', marginBottom: '8px' }}>🎉</div>
-                <h3
-                  style={{
-                    fontFamily: 'var(--font-heading)',
-                    fontSize: '1.4rem',
-                    color: '#ffd700',
-                    fontWeight: 800,
-                    marginBottom: '10px',
-                  }}
-                >
-                  CONGRATULATIONS!
-                </h3>
-                <h4 style={{ fontFamily: 'var(--font-retro)', fontSize: '0.78rem', color: '#ff65a3', marginBottom: '14px' }}>
-                  {measurementResult.title}
-                </h4>
+            <div className="level-dialogue-content">
+              {measurementResult.success ? (
+                <>
+                  <div style={{ fontSize: '2.4rem', marginBottom: '4px' }}>🎉</div>
+                  <h3
+                    style={{
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: '1.3rem',
+                      color: '#ffd700',
+                      fontWeight: 800,
+                      marginBottom: '4px',
+                    }}
+                  >
+                    CONGRATULATIONS!
+                  </h3>
+                  <h4 style={{ fontFamily: 'var(--font-retro)', fontSize: '0.74rem', color: '#ff65a3', marginBottom: '10px' }}>
+                    {measurementResult.title}
+                  </h4>
 
-                <div
-                  style={{
-                    background: 'rgba(0, 0, 0, 0.5)',
-                    padding: '12px 16px',
-                    borderRadius: '14px',
-                    textAlign: 'left',
-                    fontSize: '0.85rem',
-                    color: '#e2e8f0',
-                    lineHeight: '1.6',
-                    marginBottom: '16px',
-                    width: '100%',
-                    maxWidth: '400px',
-                  }}
-                >
-                  {measurementResult.stats.map((s, idx) => (
-                    <div key={idx} style={{ marginBottom: '4px' }}>• {s}</div>
-                  ))}
-                  <p style={{ marginTop: '8px', color: '#a7f3d0', fontStyle: 'italic', fontSize: '0.8rem' }}>
-                    "{measurementResult.joke}"
+                  <div
+                    style={{
+                      background: 'rgba(0, 0, 0, 0.6)',
+                      padding: '10px 14px',
+                      borderRadius: '14px',
+                      textAlign: 'left',
+                      fontSize: '0.78rem',
+                      color: '#e2e8f0',
+                      lineHeight: '1.45',
+                      marginBottom: '10px',
+                      width: '100%',
+                      maxWidth: '380px',
+                    }}
+                  >
+                    {measurementResult.stats.map((s, idx) => (
+                      <div key={idx} style={{ marginBottom: '3px' }}>• {s}</div>
+                    ))}
+                    <p style={{ marginTop: '6px', color: '#a7f3d0', fontStyle: 'italic', fontSize: '0.76rem' }}>
+                      "{measurementResult.joke}"
+                    </p>
+                  </div>
+
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      color: '#ffd700',
+                      fontFamily: 'var(--font-retro)',
+                      fontSize: '0.82rem',
+                      marginBottom: '14px',
+                    }}
+                  >
+                    <Award size={18} color="#ffd700" />
+                    <span>+100 POINTS AWARDED</span>
+                  </div>
+
+                  <button
+                    className="btn-arcade btn-gold animate-bounce-slow"
+                    onClick={() => {
+                      audioSystem.playClick();
+                      onCompleteLevel();
+                    }}
+                    style={{ padding: '12px 24px', fontSize: '0.98rem' }}
+                  >
+                    <span>NEXT MISSION UNLOCKED</span>
+                    <ArrowRight size={18} />
+                  </button>
+                </>
+              ) : (
+                <>
+                  <div style={{ fontSize: '2.2rem', marginBottom: '6px' }}>⚠️</div>
+                  <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', color: '#f87171', marginBottom: '6px' }}>
+                    {measurementResult.title}
+                  </h3>
+                  <p style={{ fontSize: '0.82rem', color: '#e2e8f0', marginBottom: '14px', maxWidth: '340px' }}>
+                    {measurementResult.message}
                   </p>
-                </div>
-
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    color: '#ffd700',
-                    fontFamily: 'var(--font-retro)',
-                    fontSize: '0.9rem',
-                    marginBottom: '20px',
-                  }}
-                >
-                  <Award size={20} color="#ffd700" />
-                  <span>+100 POINTS AWARDED</span>
-                </div>
-
-                <button
-                  className="btn-arcade"
-                  onClick={() => {
-                    audioSystem.playClick();
-                    onCompleteLevel();
-                  }}
-                >
-                  <span>NEXT MISSION UNLOCKED</span>
-                  <ArrowRight size={18} />
-                </button>
-              </>
-            ) : (
-              <>
-                <div style={{ fontSize: '2.5rem', marginBottom: '8px' }}>⚠️</div>
-                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.3rem', color: '#f87171', marginBottom: '8px' }}>
-                  {measurementResult.title}
-                </h3>
-                <p style={{ fontSize: '0.85rem', color: '#e2e8f0', marginBottom: '18px', maxWidth: '360px' }}>
-                  {measurementResult.message}
-                </p>
-                <button className="btn-arcade btn-secondary" onClick={handleReset}>
-                  <RotateCcw size={16} />
-                  <span>RETRY MEASUREMENT</span>
-                </button>
-              </>
-            )}
+                  <button className="btn-arcade btn-secondary" onClick={handleReset} style={{ padding: '10px 22px' }}>
+                    <RotateCcw size={16} />
+                    <span>RETRY MEASUREMENT</span>
+                  </button>
+                </>
+              )}
+            </div>
           </div>
         )}
 
         {/* Failed timeout overlay */}
         {isFailed && !measurementResult && (
           <div className="level-dialogue-overlay">
-            <div style={{ fontSize: '2.5rem', marginBottom: '8px' }}>⏰</div>
-            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', color: '#f87171', marginBottom: '8px' }}>
-              TIME RAN OUT!
-            </h3>
-            <p style={{ fontSize: '0.85rem', color: '#e2e8f0', marginBottom: '18px' }}>
-              Scientists grew impatient waiting for the measurement!
-            </p>
-            <button className="btn-arcade" onClick={handleReset}>
-              <RotateCcw size={16} />
-              <span>TRY AGAIN</span>
-            </button>
+            <div className="level-dialogue-content">
+              <div style={{ fontSize: '2.4rem', marginBottom: '6px' }}>⏰</div>
+              <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.3rem', color: '#f87171', marginBottom: '6px' }}>
+                TIME RAN OUT!
+              </h3>
+              <p style={{ fontSize: '0.82rem', color: '#e2e8f0', marginBottom: '16px' }}>
+                Scientists grew impatient waiting for the measurement!
+              </p>
+              <button className="btn-arcade" onClick={handleReset} style={{ padding: '10px 22px' }}>
+                <RotateCcw size={16} />
+                <span>TRY AGAIN</span>
+              </button>
+            </div>
           </div>
         )}
       </div>
 
       {/* Control Buttons */}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', marginTop: '18px', flexWrap: 'wrap' }}>
-        <button
-          className="btn-arcade"
-          disabled={isScanning || !!measurementResult || isFailed}
-          onClick={handleStartMeasurement}
-          style={{
-            padding: '14px 28px',
-            opacity: isScanning || !!measurementResult || isFailed ? 0.6 : 1,
-          }}
-        >
-          <Scan size={20} />
-          <span>{isScanning ? 'CALCULATING FOREHEAD...' : 'CALCULATE DIMENSIONS 📐'}</span>
-        </button>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginTop: '14px', flexWrap: 'wrap' }}>
+        {measurementResult?.success ? (
+          <button
+            className="btn-arcade btn-gold animate-pulse-glow"
+            onClick={() => {
+              audioSystem.playClick();
+              onCompleteLevel();
+            }}
+            style={{ padding: '14px 28px', width: '100%', maxWidth: '360px' }}
+          >
+            <span>NEXT MISSION UNLOCKED</span>
+            <ArrowRight size={20} />
+          </button>
+        ) : (measurementResult && !measurementResult.success) || isFailed ? (
+          <button
+            className="btn-arcade"
+            onClick={handleReset}
+            style={{ padding: '14px 28px', width: '100%', maxWidth: '360px' }}
+          >
+            <RotateCcw size={18} />
+            <span>TRY AGAIN 🔄</span>
+          </button>
+        ) : (
+          <button
+            className="btn-arcade"
+            disabled={isScanning}
+            onClick={handleStartMeasurement}
+            style={{
+              padding: '14px 28px',
+              width: '100%',
+              maxWidth: '360px',
+              opacity: isScanning ? 0.65 : 1,
+            }}
+          >
+            <Scan size={20} />
+            <span>{isScanning ? 'CALCULATING FOREHEAD...' : 'CALCULATE DIMENSIONS 📐'}</span>
+          </button>
+        )}
       </div>
     </div>
   );

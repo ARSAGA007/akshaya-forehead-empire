@@ -104,7 +104,11 @@ export default function IntroductionScreen({ onAcceptMission }) {
         </h3>
       </div>
 
-      <button className="btn-arcade" onClick={handleAccept} style={{ padding: '16px 36px', fontSize: '1.2rem' }}>
+      <button
+        className="btn-arcade"
+        onClick={handleAccept}
+        style={{ padding: '14px 28px', fontSize: 'clamp(1rem, 3.5vw, 1.2rem)', width: '100%', maxWidth: '340px' }}
+      >
         <span>ACCEPT MISSION</span>
         <Check size={20} />
       </button>

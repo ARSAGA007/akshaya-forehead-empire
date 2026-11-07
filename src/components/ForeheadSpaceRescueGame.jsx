@@ -819,137 +819,169 @@ export default function ForeheadSpaceRescueGame({ onCompleteLevel, onUpdateScore
         {/* Pause Overlay */}
         {gameState === 'paused' && (
           <div className="level-dialogue-overlay">
-            <div style={{ fontSize: '3rem', marginBottom: '8px' }}>⏸️</div>
-            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.6rem', color: '#ffd700', marginBottom: '6px' }}>
-              GAME PAUSED
-            </h3>
-            <p style={{ fontSize: '0.88rem', color: '#e2e8f0', marginBottom: '20px' }}>
-              Catch your breath! The galaxy needs your piloting skills.
-            </p>
-            <button className="btn-arcade" onClick={togglePause}>
-              <Play size={18} />
-              <span>RESUME FLIGHT</span>
-            </button>
+            <div className="level-dialogue-content">
+              <div style={{ fontSize: '2.5rem', marginBottom: '6px' }}>⏸️</div>
+              <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', color: '#ffd700', marginBottom: '6px' }}>
+                GAME PAUSED
+              </h3>
+              <p style={{ fontSize: '0.82rem', color: '#e2e8f0', marginBottom: '16px' }}>
+                Catch your breath! The galaxy needs your piloting skills.
+              </p>
+              <button className="btn-arcade" onClick={togglePause} style={{ padding: '10px 22px' }}>
+                <Play size={16} />
+                <span>RESUME FLIGHT</span>
+              </button>
+            </div>
           </div>
         )}
 
         {/* Victory Celebration Dialogue */}
         {gameState === 'victory' && (
           <div className="level-dialogue-overlay">
-            <div style={{ fontSize: '3.4rem', marginBottom: '8px' }}>🏆🚀🎉</div>
-            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.7rem', color: '#ffd700', marginBottom: '6px' }}>
-              SPACE RESCUE SUCCESSFUL!
-            </h3>
-            <h4 style={{ fontFamily: 'var(--font-retro)', fontSize: '0.82rem', color: '#4ade80', marginBottom: '16px' }}>
-              AKSHAYA HAS SAVED THE GALAXY! 😂
-            </h4>
+            <div className="level-dialogue-content">
+              <div style={{ fontSize: '2.5rem', marginBottom: '4px' }}>🏆🚀🎉</div>
+              <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', color: '#ffd700', marginBottom: '4px' }}>
+                SPACE RESCUE SUCCESSFUL!
+              </h3>
+              <h4 style={{ fontFamily: 'var(--font-retro)', fontSize: '0.74rem', color: '#4ade80', marginBottom: '10px' }}>
+                AKSHAYA HAS SAVED THE GALAXY! 😂
+              </h4>
 
-            <div
-              style={{
-                background: 'rgba(0, 0, 0, 0.6)',
-                padding: '14px 18px',
-                borderRadius: '16px',
-                textAlign: 'left',
-                fontSize: '0.85rem',
-                color: '#e2e8f0',
-                lineHeight: '1.6',
-                marginBottom: '18px',
-                maxWidth: '380px',
-              }}
-            >
-              <p>🛰️ <strong>Mission Report:</strong> You survived the 30-second onslaught of meteors, flying slippers, and rogue aliens on Akshaya's forehead space station!</p>
-              <p style={{ marginTop: '6px', color: '#ffd700' }}>⭐ Reward: <strong>+200 BASE POINTS</strong> + Collectibles!</p>
+              <div
+                style={{
+                  background: 'rgba(0, 0, 0, 0.6)',
+                  padding: '10px 14px',
+                  borderRadius: '14px',
+                  textAlign: 'left',
+                  fontSize: '0.78rem',
+                  color: '#e2e8f0',
+                  lineHeight: '1.45',
+                  marginBottom: '10px',
+                  maxWidth: '380px',
+                }}
+              >
+                <p>🛰️ <strong>Mission Report:</strong> You survived the 30-second onslaught of meteors, flying slippers, and rogue aliens on Akshaya's forehead space station!</p>
+                <p style={{ marginTop: '6px', color: '#ffd700' }}>⭐ Reward: <strong>+200 BASE POINTS</strong> + Collectibles!</p>
+              </div>
+
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  color: '#ffd700',
+                  fontFamily: 'var(--font-retro)',
+                  fontSize: '0.82rem',
+                  marginBottom: '14px',
+                }}
+              >
+                <Award size={18} color="#ffd700" />
+                <span>+{200 + displayScore} TOTAL POINTS AWARDED</span>
+              </div>
+
+              <button
+                className="btn-arcade btn-gold animate-bounce-slow"
+                onClick={() => {
+                  audioSystem.playClick();
+                  onCompleteLevel();
+                }}
+                style={{ padding: '12px 24px', fontSize: '0.96rem' }}
+              >
+                <span>UNLOCK LEVEL 3: DELIVERY DASH</span>
+                <ArrowRight size={18} />
+              </button>
             </div>
-
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                color: '#ffd700',
-                fontFamily: 'var(--font-retro)',
-                fontSize: '0.9rem',
-                marginBottom: '20px',
-              }}
-            >
-              <Award size={20} color="#ffd700" />
-              <span>+{200 + displayScore} TOTAL POINTS AWARDED</span>
-            </div>
-
-            <button
-              className="btn-arcade"
-              onClick={() => {
-                audioSystem.playClick();
-                onCompleteLevel();
-              }}
-            >
-              <span>UNLOCK LEVEL 3: DELIVERY DASH</span>
-              <ArrowRight size={18} />
-            </button>
           </div>
         )}
 
         {/* Game Over Dialogue */}
         {gameState === 'gameover' && (
           <div className="level-dialogue-overlay">
-            <div style={{ fontSize: '3rem', marginBottom: '8px' }}>💥🩴</div>
-            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', color: '#f87171', marginBottom: '8px' }}>
-              SPACESHIP DESTROYED!
-            </h3>
-            <p style={{ fontSize: '0.88rem', color: '#e2e8f0', marginBottom: '20px', maxWidth: '340px' }}>
-              Forehead debris and flying slippers were too intense! Grab the 🧴 Sunscreen Shield and 💖 Extra Lives to survive.
-            </p>
-            <button className="btn-arcade" onClick={handleRestart}>
-              <RotateCcw size={16} />
-              <span>RELAUNCH RESCUE SHIP</span>
-            </button>
+            <div className="level-dialogue-content">
+              <div style={{ fontSize: '2.5rem', marginBottom: '6px' }}>💥🩴</div>
+              <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.3rem', color: '#f87171', marginBottom: '6px' }}>
+                SPACESHIP DESTROYED!
+              </h3>
+              <p style={{ fontSize: '0.82rem', color: '#e2e8f0', marginBottom: '14px', maxWidth: '340px' }}>
+                Forehead debris and flying slippers were too intense! Grab the 🧴 Sunscreen Shield and 💖 Extra Lives to survive.
+              </p>
+              <button className="btn-arcade" onClick={handleRestart} style={{ padding: '10px 22px' }}>
+                <RotateCcw size={16} />
+                <span>RELAUNCH RESCUE SHIP</span>
+              </button>
+            </div>
           </div>
         )}
       </div>
 
-      {/* Desktop and Mobile Controls */}
-      <div style={{ marginTop: '12px', textAlign: 'center' }}>
-        <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', marginBottom: '8px' }}>
-          Desktop: <kbd>W</kbd>/<kbd>A</kbd>/<kbd>S</kbd>/<kbd>D</kbd> or Arrows | Mobile: Drag on canvas or use D-Pad below
-        </div>
+      {/* Desktop and Mobile Controls / Progression */}
+      <div style={{ marginTop: '14px', textAlign: 'center' }}>
+        {gameState === 'victory' ? (
+          <button
+            className="btn-arcade btn-gold animate-pulse-glow"
+            onClick={() => {
+              audioSystem.playClick();
+              onCompleteLevel();
+            }}
+            style={{ padding: '14px 28px', width: '100%', maxWidth: '380px' }}
+          >
+            <span>UNLOCK LEVEL 3: DELIVERY DASH</span>
+            <ArrowRight size={20} />
+          </button>
+        ) : gameState === 'gameover' ? (
+          <button
+            className="btn-arcade"
+            onClick={handleRestart}
+            style={{ padding: '14px 28px', width: '100%', maxWidth: '380px' }}
+          >
+            <RotateCcw size={18} />
+            <span>RELAUNCH RESCUE SHIP 🔄</span>
+          </button>
+        ) : (
+          <>
+            <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', marginBottom: '8px' }}>
+              Desktop: <kbd>W</kbd>/<kbd>A</kbd>/<kbd>S</kbd>/<kbd>D</kbd> or Arrows | Mobile: Drag on canvas or use D-Pad below
+            </div>
 
-        <div className="touch-dpad">
-          <div></div>
-          <button
-            className="dpad-btn"
-            onPointerDown={() => { touchControlsRef.current.up = true; }}
-            onPointerUp={() => { touchControlsRef.current.up = false; }}
-            onPointerLeave={() => { touchControlsRef.current.up = false; }}
-          >
-            ▲
-          </button>
-          <div></div>
+            <div className="touch-dpad">
+              <div></div>
+              <button
+                className="dpad-btn"
+                onPointerDown={() => { touchControlsRef.current.up = true; }}
+                onPointerUp={() => { touchControlsRef.current.up = false; }}
+                onPointerLeave={() => { touchControlsRef.current.up = false; }}
+              >
+                ▲
+              </button>
+              <div></div>
 
-          <button
-            className="dpad-btn"
-            onPointerDown={() => { touchControlsRef.current.left = true; }}
-            onPointerUp={() => { touchControlsRef.current.left = false; }}
-            onPointerLeave={() => { touchControlsRef.current.left = false; }}
-          >
-            ◀
-          </button>
-          <button
-            className="dpad-btn"
-            onPointerDown={() => { touchControlsRef.current.down = true; }}
-            onPointerUp={() => { touchControlsRef.current.down = false; }}
-            onPointerLeave={() => { touchControlsRef.current.down = false; }}
-          >
-            ▼
-          </button>
-          <button
-            className="dpad-btn"
-            onPointerDown={() => { touchControlsRef.current.right = true; }}
-            onPointerUp={() => { touchControlsRef.current.right = false; }}
-            onPointerLeave={() => { touchControlsRef.current.right = false; }}
-          >
-            ▶
-          </button>
-        </div>
+              <button
+                className="dpad-btn"
+                onPointerDown={() => { touchControlsRef.current.left = true; }}
+                onPointerUp={() => { touchControlsRef.current.left = false; }}
+                onPointerLeave={() => { touchControlsRef.current.left = false; }}
+              >
+                ◀
+              </button>
+              <button
+                className="dpad-btn"
+                onPointerDown={() => { touchControlsRef.current.down = true; }}
+                onPointerUp={() => { touchControlsRef.current.down = false; }}
+                onPointerLeave={() => { touchControlsRef.current.down = false; }}
+              >
+                ▼
+              </button>
+              <button
+                className="dpad-btn"
+                onPointerDown={() => { touchControlsRef.current.right = true; }}
+                onPointerUp={() => { touchControlsRef.current.right = false; }}
+                onPointerLeave={() => { touchControlsRef.current.right = false; }}
+              >
+                ▶
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

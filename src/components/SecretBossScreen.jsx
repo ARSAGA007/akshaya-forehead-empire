@@ -154,13 +154,13 @@ export default function SecretBossScreen({ onProceedToFinalCelebration }) {
             </p>
 
             <button
-              className="btn-arcade"
+              className="btn-arcade btn-gold animate-pulse-glow"
               onClick={() => {
                 audioSystem.playClick();
                 audioSystem.playCelebrationFanfare();
                 onProceedToFinalCelebration();
               }}
-              style={{ padding: '14px 30px' }}
+              style={{ padding: '14px 24px', width: '100%', maxWidth: '380px' }}
             >
               <span>CLAIM ROYAL BIRTHDAY CROWN 👑</span>
               <ArrowRight size={18} />

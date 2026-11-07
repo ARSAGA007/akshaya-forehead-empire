@@ -9,10 +9,10 @@ export default function LevelIndicator({
   onSelectLevel,
 }) {
   const levels = [
-    { id: 'level1', num: 1, name: 'Measurement', icon: Compass },
-    { id: 'level2', num: 2, name: 'Space Rescue', icon: Rocket },
-    { id: 'level3', num: 3, name: 'Delivery Dash', icon: Bike },
-    { id: 'secret-boss', num: 4, name: 'Secret Boss', icon: Gift, isSecret: true },
+    { id: 'level1', num: 1, name: 'Measurement', shortName: 'Lab 🔬', icon: Compass },
+    { id: 'level2', num: 2, name: 'Space Rescue', shortName: 'Space 🚀', icon: Rocket },
+    { id: 'level3', num: 3, name: 'Delivery Dash', shortName: 'Dash 🛵', icon: Bike },
+    { id: 'secret-boss', num: 4, name: 'Secret Boss', shortName: 'Boss 👑', icon: Gift, isSecret: true },
   ];
 
   return (
@@ -40,13 +40,14 @@ export default function LevelIndicator({
             }}
           >
             {isCompleted ? (
-              <CheckCircle2 size={14} color="#4ade80" />
+              <CheckCircle2 size={13} color="#4ade80" />
             ) : isLocked ? (
-              <Lock size={14} />
+              <Lock size={13} />
             ) : (
-              <Icon size={14} color={isActive ? '#ff65a3' : '#d8b4fe'} />
+              <Icon size={13} color={isActive ? '#ff65a3' : '#d8b4fe'} />
             )}
-            <span>M{lvl.num}: {lvl.name}</span>
+            <span className="level-chip-label-desktop">M{lvl.num}: {lvl.name}</span>
+            <span className="level-chip-label-mobile">M{lvl.num}: {lvl.shortName}</span>
           </button>
         );
       })}

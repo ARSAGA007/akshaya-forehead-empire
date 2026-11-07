@@ -714,118 +714,150 @@ export default function BirthdayDeliveryDashGame({ onCompleteLevel, onUpdateScor
         {/* Pause Overlay */}
         {gameState === 'paused' && (
           <div className="level-dialogue-overlay">
-            <div style={{ fontSize: '3rem', marginBottom: '8px' }}>⏸️</div>
-            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.6rem', color: '#ffd700', marginBottom: '6px' }}>
-              DELIVERY PAUSED
-            </h3>
-            <p style={{ fontSize: '0.88rem', color: '#e2e8f0', marginBottom: '20px' }}>
-              The birthday cake is resting safely on the moped rack!
-            </p>
-            <button className="btn-arcade" onClick={togglePause}>
-              <Play size={18} />
-              <span>RESUME DASH</span>
-            </button>
+            <div className="level-dialogue-content">
+              <div style={{ fontSize: '2.5rem', marginBottom: '6px' }}>⏸️</div>
+              <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', color: '#ffd700', marginBottom: '6px' }}>
+                DELIVERY PAUSED
+              </h3>
+              <p style={{ fontSize: '0.82rem', color: '#e2e8f0', marginBottom: '16px' }}>
+                The birthday cake is resting safely on the moped rack!
+              </p>
+              <button className="btn-arcade" onClick={togglePause} style={{ padding: '10px 22px' }}>
+                <Play size={16} />
+                <span>RESUME DASH</span>
+              </button>
+            </div>
           </div>
         )}
 
         {/* Victory Celebration Dialogue */}
         {gameState === 'victory' && (
           <div className="level-dialogue-overlay">
-            <div style={{ fontSize: '3.4rem', marginBottom: '8px' }}>🎂🛵🎉</div>
-            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.7rem', color: '#ffd700', marginBottom: '6px' }}>
-              DELIVERY SUCCESSFUL! 🎂
-            </h3>
-            <h4 style={{ fontFamily: 'var(--font-retro)', fontSize: '0.82rem', color: '#4ade80', marginBottom: '16px' }}>
-              THE WORLD'S BIGGEST BIRTHDAY DELIVERY COMPLETED!
-            </h4>
+            <div className="level-dialogue-content">
+              <div style={{ fontSize: '2.5rem', marginBottom: '4px' }}>🎂🛵🎉</div>
+              <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', color: '#ffd700', marginBottom: '4px' }}>
+                DELIVERY SUCCESSFUL! 🎂
+              </h3>
+              <h4 style={{ fontFamily: 'var(--font-retro)', fontSize: '0.74rem', color: '#4ade80', marginBottom: '10px' }}>
+                THE WORLD'S BIGGEST BIRTHDAY DELIVERY COMPLETED!
+              </h4>
 
-            <div
-              style={{
-                background: 'rgba(0, 0, 0, 0.6)',
-                padding: '14px 18px',
-                borderRadius: '16px',
-                textAlign: 'left',
-                fontSize: '0.85rem',
-                color: '#e2e8f0',
-                lineHeight: '1.6',
-                marginBottom: '18px',
-                maxWidth: '380px',
-              }}
-            >
-              <p>🛵 <strong>Delivery Report:</strong> You navigated potholes, flying slippers, and Chennai traffic across Akshaya's forehead highway! The royal birthday cake arrived in mint condition!</p>
-              <p style={{ marginTop: '6px', color: '#ffd700' }}>⭐ Level 3 Bonus: <strong>+300 POINTS</strong></p>
-              <p style={{ marginTop: '4px', color: '#86efac', fontWeight: 700 }}>
-                🎯 Total Accumulated Score: {totalScore + 300 + displayScore} PTS!
-              </p>
+              <div
+                style={{
+                  background: 'rgba(0, 0, 0, 0.6)',
+                  padding: '10px 14px',
+                  borderRadius: '14px',
+                  textAlign: 'left',
+                  fontSize: '0.78rem',
+                  color: '#e2e8f0',
+                  lineHeight: '1.45',
+                  marginBottom: '10px',
+                  maxWidth: '380px',
+                }}
+              >
+                <p>🛵 <strong>Delivery Report:</strong> You navigated potholes, flying slippers, and Chennai traffic across Akshaya's forehead highway! The royal birthday cake arrived in mint condition!</p>
+                <p style={{ marginTop: '6px', color: '#ffd700' }}>⭐ Level 3 Bonus: <strong>+300 POINTS</strong></p>
+                <p style={{ marginTop: '4px', color: '#86efac', fontWeight: 700 }}>
+                  🎯 Total Accumulated Score: {totalScore + 300 + displayScore} PTS!
+                </p>
+              </div>
+
+              <button
+                className="btn-arcade btn-gold animate-bounce-slow"
+                onClick={() => {
+                  audioSystem.playClick();
+                  onCompleteLevel();
+                }}
+                style={{ padding: '12px 24px', fontSize: '0.96rem' }}
+              >
+                <span>PROCEED TO VICTORY... WAIT? 👀</span>
+                <ArrowRight size={18} />
+              </button>
             </div>
-
-            <button
-              className="btn-arcade"
-              onClick={() => {
-                audioSystem.playClick();
-                onCompleteLevel();
-              }}
-            >
-              <span>PROCEED TO VICTORY... WAIT? 👀</span>
-              <ArrowRight size={18} />
-            </button>
           </div>
         )}
 
         {/* Game Over Dialogue */}
         {gameState === 'gameover' && (
           <div className="level-dialogue-overlay">
-            <div style={{ fontSize: '3rem', marginBottom: '8px' }}>💥🛵</div>
-            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', color: '#f87171', marginBottom: '8px' }}>
-              CAKE DELIVERY FAILED!
-            </h3>
-            <p style={{ fontSize: '0.88rem', color: '#e2e8f0', marginBottom: '20px', maxWidth: '340px' }}>
-              The potholes and flying slippers claimed the scooter! Grab the 🧴 Sunscreen Boost for temporary shield immunity.
-            </p>
-            <button className="btn-arcade" onClick={handleRestart}>
-              <RotateCcw size={16} />
-              <span>RESTART DELIVERY DASH</span>
-            </button>
+            <div className="level-dialogue-content">
+              <div style={{ fontSize: '2.5rem', marginBottom: '6px' }}>💥🛵</div>
+              <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.3rem', color: '#f87171', marginBottom: '6px' }}>
+                CAKE DELIVERY FAILED!
+              </h3>
+              <p style={{ fontSize: '0.82rem', color: '#e2e8f0', marginBottom: '14px', maxWidth: '340px' }}>
+                The potholes and flying slippers claimed the scooter! Grab the 🧴 Sunscreen Boost for temporary shield immunity.
+              </p>
+              <button className="btn-arcade" onClick={handleRestart} style={{ padding: '10px 22px' }}>
+                <RotateCcw size={16} />
+                <span>RESTART DELIVERY DASH</span>
+              </button>
+            </div>
           </div>
         )}
       </div>
 
-      {/* Desktop and Mobile Controls */}
-      <div style={{ marginTop: '12px', textAlign: 'center' }}>
-        <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', marginBottom: '8px' }}>
-          Desktop: <kbd>A</kbd>/<kbd>D</kbd> or <kbd>←</kbd>/<kbd>→</kbd> Steer | <kbd>Space</kbd>/<kbd>W</kbd> Boost | Mobile: Buttons below
-        </div>
-
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', alignItems: 'center' }}>
+      {/* Desktop and Mobile Controls / Progression */}
+      <div style={{ marginTop: '14px', textAlign: 'center' }}>
+        {gameState === 'victory' ? (
           <button
-            className="dpad-btn"
-            style={{ width: '70px', height: '52px', fontSize: '1.3rem' }}
-            onPointerDown={() => { touchControlsRef.current.left = true; }}
-            onPointerUp={() => { touchControlsRef.current.left = false; }}
-            onPointerLeave={() => { touchControlsRef.current.left = false; }}
+            className="btn-arcade btn-gold animate-pulse-glow"
+            onClick={() => {
+              audioSystem.playClick();
+              onCompleteLevel();
+            }}
+            style={{ padding: '14px 28px', width: '100%', maxWidth: '380px' }}
           >
-            ◀ LEFT
+            <span>PROCEED TO VICTORY... WAIT? 👀</span>
+            <ArrowRight size={20} />
           </button>
-
+        ) : gameState === 'gameover' ? (
           <button
-            className="btn-arcade btn-gold"
-            style={{ padding: '10px 22px', fontSize: '0.9rem' }}
-            onClick={activateBoost}
+            className="btn-arcade"
+            onClick={handleRestart}
+            style={{ padding: '14px 28px', width: '100%', maxWidth: '380px' }}
           >
-            <Zap size={18} />
-            <span>BOOST 🚀</span>
+            <RotateCcw size={18} />
+            <span>RESTART DELIVERY DASH 🔄</span>
           </button>
+        ) : (
+          <>
+            <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', marginBottom: '8px' }}>
+              Desktop: <kbd>A</kbd>/<kbd>D</kbd> or <kbd>←</kbd>/<kbd>→</kbd> Steer | <kbd>Space</kbd>/<kbd>W</kbd> Boost | Mobile: Buttons below
+            </div>
 
-          <button
-            className="dpad-btn"
-            style={{ width: '70px', height: '52px', fontSize: '1.3rem' }}
-            onPointerDown={() => { touchControlsRef.current.right = true; }}
-            onPointerUp={() => { touchControlsRef.current.right = false; }}
-            onPointerLeave={() => { touchControlsRef.current.right = false; }}
-          >
-            RIGHT ▶
-          </button>
-        </div>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', alignItems: 'center' }}>
+              <button
+                className="dpad-btn"
+                style={{ width: '68px', height: '50px', fontSize: '1.15rem' }}
+                onPointerDown={() => { touchControlsRef.current.left = true; }}
+                onPointerUp={() => { touchControlsRef.current.left = false; }}
+                onPointerLeave={() => { touchControlsRef.current.left = false; }}
+              >
+                ◀ LEFT
+              </button>
+
+              <button
+                className="btn-arcade btn-gold"
+                style={{ padding: '10px 20px', fontSize: '0.88rem' }}
+                onClick={activateBoost}
+              >
+                <Zap size={16} />
+                <span>BOOST 🚀</span>
+              </button>
+
+              <button
+                className="dpad-btn"
+                style={{ width: '68px', height: '50px', fontSize: '1.15rem' }}
+                onPointerDown={() => { touchControlsRef.current.right = true; }}
+                onPointerUp={() => { touchControlsRef.current.right = false; }}
+                onPointerLeave={() => { touchControlsRef.current.right = false; }}
+              >
+                RIGHT ▶
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

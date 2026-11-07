@@ -91,6 +91,14 @@
   color: #86efac;
 }
 
+.level-chip-label-mobile {
+  display: none;
+}
+
+.level-chip-label-desktop {
+  display: inline;
+}
+
 /* Welcome Screen Portrait Frame */
 .portrait-hero-wrapper {
   position: relative;
@@ -382,17 +390,31 @@
 .level-dialogue-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(15, 7, 30, 0.88);
-  backdrop-filter: blur(8px);
+  background: rgba(14, 6, 28, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 24px;
+  justify-content: flex-start;
+  padding: 16px 14px;
   z-index: 50;
   text-align: center;
-  border-radius: 22px;
-  animation: fadeIn 0.3s ease;
+  border-radius: inherit;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  animation: fadeIn 0.25s ease;
+}
+
+.level-dialogue-content {
+  margin: auto 0;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 0;
 }
 
 @keyframes fadeIn {
@@ -425,23 +447,43 @@
   }
 
   .arcade-card {
-    padding: 18px 12px;
+    padding: 16px 10px;
     border-radius: 20px;
   }
 
   .level-strip {
-    gap: 4px;
-    margin-bottom: 12px;
+    gap: 6px;
+    margin-bottom: 10px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 2px 2px 6px 2px;
+    justify-content: flex-start;
+    scrollbar-width: none;
+  }
+
+  .level-strip::-webkit-scrollbar {
+    display: none;
   }
 
   .level-step-chip {
-    padding: 4px 8px;
+    padding: 4px 10px;
     font-size: 0.72rem;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .level-chip-label-desktop {
+    display: none;
+  }
+
+  .level-chip-label-mobile {
+    display: inline;
   }
 
   .portrait-hero-wrapper {
-    width: 170px;
-    height: 210px;
+    width: 160px;
+    height: 200px;
     margin-bottom: 12px;
   }
 
@@ -451,26 +493,40 @@
   }
 
   .lab-container {
-    height: 380px;
+    width: 100%;
     max-width: 100%;
+    min-height: 420px;
+    height: 54vh;
+    aspect-ratio: auto;
     border-radius: 18px;
   }
 
   .satellite-game-stage,
   .parking-game-stage {
+    width: 100%;
     max-width: 100%;
+    aspect-ratio: 4/5;
+    max-height: 54vh;
     border-radius: 18px;
   }
 
+  .level-dialogue-overlay {
+    padding: 12px 8px;
+  }
+
+  .level-dialogue-content {
+    padding: 2px 0;
+  }
+
   .touch-dpad {
-    grid-template-columns: repeat(3, 50px);
-    grid-template-rows: repeat(2, 50px);
+    grid-template-columns: repeat(3, 48px);
+    grid-template-rows: repeat(2, 48px);
     gap: 6px;
     margin-top: 10px;
   }
 
   .dpad-btn {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     border-radius: 12px;
   }
 
@@ -480,7 +536,7 @@
   }
 
   .video-element {
-    max-height: 55vh;
+    max-height: 52vh;
   }
 }
 

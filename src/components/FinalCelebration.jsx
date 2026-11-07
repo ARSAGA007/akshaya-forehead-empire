@@ -93,9 +93,9 @@ export default function FinalCelebration({
       </h2>
 
       {/* Hero Royal Photograph Showcase */}
-      <div style={{ position: 'relative', width: '230px', height: '280px', margin: '0 auto 20px auto' }}>
+      <div style={{ position: 'relative', width: 'clamp(180px, 45vw, 230px)', height: 'clamp(220px, 55vw, 280px)', margin: '0 auto 20px auto' }}>
         <div className="portrait-glow-ring"></div>
-        <div className="crown-badge" style={{ fontSize: '3rem', top: '-30px' }}>👑</div>
+        <div className="crown-badge" style={{ fontSize: 'clamp(2.4rem, 6vw, 3rem)', top: '-28px' }}>👑</div>
         <img
           src={gallery[activePhotoIdx].src}
           alt={gallery[activePhotoIdx].caption}
