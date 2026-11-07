@@ -111,9 +111,17 @@
 }
 
 @keyframes borderRotate {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .portrait-hero-img {
@@ -139,8 +147,15 @@
 }
 
 @keyframes crownBob {
-  0%, 100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
-  50% { transform: translateX(-50%) translateY(-6px) rotate(4deg); }
+
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(-6px) rotate(4deg);
+  }
 }
 
 /* Mission preview cards on Welcome Screen */
@@ -231,8 +246,17 @@
 }
 
 @keyframes targetPulse {
-  0%, 100% { border-color: #ff2a85; box-shadow: 0 0 15px rgba(255, 42, 133, 0.3); }
-  50% { border-color: #ffd700; box-shadow: 0 0 25px rgba(255, 215, 0, 0.6); }
+
+  0%,
+  100% {
+    border-color: #ff2a85;
+    box-shadow: 0 0 15px rgba(255, 42, 133, 0.3);
+  }
+
+  50% {
+    border-color: #ffd700;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+  }
 }
 
 /* Draggable Ruler */
@@ -410,8 +434,15 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.96); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* Floating emojis */
@@ -423,10 +454,23 @@
 }
 
 @keyframes floatUp {
-  0% { transform: translateY(0) scale(0.8); opacity: 0; }
-  20% { opacity: 0.8; }
-  80% { opacity: 0.8; }
-  100% { transform: translateY(-160px) scale(1.2); opacity: 0; }
+  0% {
+    transform: translateY(0) scale(0.8);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.8;
+  }
+
+  80% {
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translateY(-160px) scale(1.2);
+    opacity: 0;
+  }
 }
 
 /* Mobile & Touch Specific Optimizations */
@@ -527,5 +571,3 @@
     max-height: 52vh;
   }
 }
-
-

@@ -21,7 +21,7 @@ export default function SecretBossScreen({ onProceedToFinalCelebration }) {
   };
 
   return (
-    <div className="arcade-card" style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
+    <div className="arcade-card" style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center', width: '100%' }}>
       {!isUnlocked ? (
         <div style={{ padding: '20px 10px' }}>
           <div

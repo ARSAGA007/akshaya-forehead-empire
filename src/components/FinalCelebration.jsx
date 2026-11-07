@@ -42,7 +42,7 @@ export default function FinalCelebration({
   };
 
   return (
-    <div className="arcade-card animate-pulse-glow" style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto' }}>
+    <div className="arcade-card animate-pulse-glow" style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto', width: '100%' }}>
       {/* Floating Birthday Balloons & Hearts */}
       <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', fontSize: '2.4rem', marginBottom: '8px' }}>
         <span style={{ animation: 'bounceSlow 2.5s infinite' }}>🎈</span>

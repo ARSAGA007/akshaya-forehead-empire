@@ -32,6 +32,21 @@ export default function App() {
     sessionStorage.setItem('akshaya_score', score.toString());
   }, [currentScreen, completedLevels, score]);
 
+  // Scroll to absolute top immediately whenever screen changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+
+    const frameId = requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    });
+
+    return () => cancelAnimationFrame(frameId);
+  }, [currentScreen]);
+
   const secretUnlocked = completedLevels.includes(1) && completedLevels.includes(2) && completedLevels.includes(3);
 
   // Audio mute toggle
@@ -45,12 +60,20 @@ export default function App() {
     setScore((prev) => prev + points);
   };
 
-  // Progression handlers
+  // Progression handlers with instant scroll-to-top
+  const scrollToPageTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  };
+
   const handleStartChallenge = () => {
+    scrollToPageTop();
     setCurrentScreen('intro');
   };
 
   const handleAcceptMission = () => {
+    scrollToPageTop();
     setCurrentScreen('level1');
   };
 
@@ -58,6 +81,7 @@ export default function App() {
     if (!completedLevels.includes(1)) {
       setCompletedLevels((prev) => [...prev, 1]);
     }
+    scrollToPageTop();
     setCurrentScreen('level2');
   };
 
@@ -65,6 +89,7 @@ export default function App() {
     if (!completedLevels.includes(2)) {
       setCompletedLevels((prev) => [...prev, 2]);
     }
+    scrollToPageTop();
     setCurrentScreen('level3');
   };
 
@@ -73,6 +98,7 @@ export default function App() {
       setCompletedLevels((prev) => [...prev, 3]);
     }
     // Proceeds straight to Secret Boss Level 4
+    scrollToPageTop();
     setCurrentScreen('secret-boss');
   };
 
@@ -80,10 +106,12 @@ export default function App() {
     if (!completedLevels.includes(4)) {
       setCompletedLevels((prev) => [...prev, 4]);
     }
+    scrollToPageTop();
     setCurrentScreen('final');
   };
 
   const handleSelectLevel = (levelId) => {
+    scrollToPageTop();
     setCurrentScreen(levelId);
   };
 
@@ -94,16 +122,19 @@ export default function App() {
     }
     setScore(0);
     setCompletedLevels([]);
-    setCurrentScreen('welcome');
     sessionStorage.clear();
+    scrollToPageTop();
+    setCurrentScreen('welcome');
   };
 
   const handleWatchVideoAgain = () => {
     audioSystem.playClick();
+    scrollToPageTop();
     setCurrentScreen('secret-boss');
   };
 
   const handleGoHome = () => {
+    scrollToPageTop();
     setCurrentScreen('welcome');
   };
 

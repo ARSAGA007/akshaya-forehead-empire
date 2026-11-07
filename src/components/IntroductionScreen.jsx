@@ -10,7 +10,7 @@ export default function IntroductionScreen({ onAcceptMission }) {
   };
 
   return (
-    <div className="arcade-card" style={{ maxWidth: '680px', margin: 'auto', textAlign: 'center' }}>
+    <div className="arcade-card" style={{ maxWidth: '680px', margin: '0 auto', textAlign: 'center', width: '100%' }}>
       {/* Breaking News Ticker Badge */}
       <div
         style={{

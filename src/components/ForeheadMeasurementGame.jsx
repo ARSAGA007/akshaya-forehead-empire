@@ -177,7 +177,7 @@ export default function ForeheadMeasurementGame({ onCompleteLevel, onUpdateScore
   };
 
   return (
-    <div className="arcade-card" style={{ maxWidth: '720px', margin: '0 auto' }}>
+    <div className="arcade-card" style={{ maxWidth: '720px', margin: '0 auto', width: '100%' }}>
       {/* Level Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '8px' }}>
         <div>

@@ -54,7 +54,6 @@ class ArcadeAudioSystem {
       this.musicGain = this.ctx.createGain();
       this.musicGain.gain.setValueAtTime(this.musicVolume, this.ctx.currentTime);
       this.musicGain.connect(this.masterGain);
-
       this.sfxGain = this.ctx.createGain();
       this.sfxGain.gain.setValueAtTime(this.sfxVolume, this.ctx.currentTime);
       this.sfxGain.connect(this.masterGain);
@@ -72,7 +71,7 @@ class ArcadeAudioSystem {
     if (this.audioElement) {
       this.audioElement.muted = this.isMuted;
       if (!this.isMuted && this.isMusicPlaying && this.audioElement.paused) {
-        this.audioElement.play().catch(() => {});
+        this.audioElement.play().catch(() => { });
       }
     }
     return this.isMuted;
@@ -103,7 +102,7 @@ class ArcadeAudioSystem {
       try {
         this.audioElement.pause();
         this.audioElement = null;
-      } catch (e) {}
+      } catch (e) { }
     }
     if (this.isMusicPlaying) {
       this.stopMusic();
@@ -123,7 +122,7 @@ class ArcadeAudioSystem {
     try {
       if (!this.audioElement || (this.audioElement.src && !this.audioElement.src.includes(targetSrc))) {
         if (this.audioElement) {
-          try { this.audioElement.pause(); } catch (e) {}
+          try { this.audioElement.pause(); } catch (e) { }
         }
         this.audioElement = new Audio(targetSrc);
         this.audioElement.volume = this.isMuted ? 0 : this.musicVolume;
@@ -141,7 +140,7 @@ class ArcadeAudioSystem {
               // After the song finishes for the first time, loop continuously from the Happy Birthday line!
               this.audioElement.currentTime = HAPPY_BIRTHDAY_LINE_START;
               if (this.isMusicPlaying && !this.isMuted && this.audioElement.paused) {
-                this.audioElement.play().catch(() => {});
+                this.audioElement.play().catch(() => { });
               }
             }
           });
@@ -150,7 +149,7 @@ class ArcadeAudioSystem {
             if (this.audioElement) {
               this.audioElement.currentTime = HAPPY_BIRTHDAY_LINE_START;
               if (this.isMusicPlaying && !this.isMuted) {
-                this.audioElement.play().catch(() => {});
+                this.audioElement.play().catch(() => { });
               }
             }
           });
@@ -189,7 +188,7 @@ class ArcadeAudioSystem {
     if (this.audioElement) {
       try {
         this.audioElement.pause();
-      } catch (e) {}
+      } catch (e) { }
     }
     if (this.musicTimer) {
       clearTimeout(this.musicTimer);

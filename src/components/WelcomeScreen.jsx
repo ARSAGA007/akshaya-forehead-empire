@@ -12,7 +12,7 @@ export default function WelcomeScreen({ onStartChallenge }) {
   };
 
   return (
-    <div className="arcade-card animate-pulse-glow" style={{ textAlign: 'center', margin: 'auto 0' }}>
+    <div className="arcade-card animate-pulse-glow" style={{ textAlign: 'center', margin: '0 auto', width: '100%' }}>
       {/* Floating Crown and Portrait */}
       <div className="portrait-hero-wrapper">
         <div className="portrait-glow-ring"></div>

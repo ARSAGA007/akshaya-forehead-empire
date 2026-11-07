@@ -687,7 +687,7 @@ export default function ForeheadSpaceRescueGame({ onCompleteLevel, onUpdateScore
   };
 
   return (
-    <div className="arcade-card" style={{ maxWidth: '680px', margin: '0 auto' }}>
+    <div className="arcade-card" style={{ maxWidth: '680px', margin: '0 auto', width: '100%' }}>
       {/* Header Bar */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', flexWrap: 'wrap', gap: '8px' }}>
         <div>
