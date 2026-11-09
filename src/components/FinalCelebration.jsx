@@ -13,11 +13,11 @@ export default function FinalCelebration({
   const [activePhotoIdx, setActivePhotoIdx] = useState(0);
 
   const gallery = [
-    { src: '/assets/akshaya-main.jpg', caption: 'The Crowned Forehead Queen 👑' },
+    { src: '/assets/akshaya-main.jpg', caption: 'The Forehead Queen 👑' },
     { src: '/assets/akshaya-closeup-1.jpg', caption: 'The Endless Territory 📐' },
-    { src: '/assets/akshaya-closeup-2.jpg', caption: 'NASA Space Station AKSHAYA-01 🚀' },
-    { src: '/assets/akshaya-photo-2.jpg', caption: 'Swiggy Forehead Highway 🛵' },
-    { src: '/assets/akshaya-photo-3.jpg?v=2', caption: 'The Secret Boss: Legendary Reaction 😂👑' },
+    { src: '/assets/akshaya-closeup-2.jpg', caption: 'Space Station AK-01 🚀' },
+    { src: '/assets/akshaya-photo-2.jpg', caption: 'Forehead Highway 🛵' },
+    { src: '/assets/akshaya-photo-3.jpg?v=2', caption: 'Secret Boss Reaction 😂' },
   ];
 
   useEffect(() => {
@@ -108,14 +108,19 @@ export default function FinalCelebration({
             bottom: '-14px',
             left: '50%',
             transform: 'translateX(-50%)',
-            background: 'rgba(21, 13, 42, 0.92)',
+            background: 'rgba(21, 13, 42, 0.94)',
             border: '2px solid #ffd700',
             color: '#ffd700',
             fontFamily: 'var(--font-retro)',
-            fontSize: '0.62rem',
-            padding: '4px 12px',
+            fontSize: 'clamp(0.5rem, 2.2vw, 0.58rem)',
+            padding: '4px 10px',
             borderRadius: '9999px',
             whiteSpace: 'nowrap',
+            maxWidth: '92vw',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            boxSizing: 'border-box',
+            boxShadow: '0 4px 14px rgba(0, 0, 0, 0.6)',
             zIndex: 10,
           }}
         >
