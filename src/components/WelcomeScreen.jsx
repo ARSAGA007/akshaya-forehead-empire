@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Sparkles, Compass, Rocket, Bike, Heart, PartyPopper, X } from 'lucide-react';
 import { audioSystem } from '../utils/audioSystem';
 import { fireHeartConfetti } from '../utils/confetti';
@@ -141,7 +142,7 @@ export default function WelcomeScreen({ onStartChallenge }) {
       </div>
 
       {/* Confirmation Pop-Up Modal */}
-      {showConfirmModal && (
+      {showConfirmModal && createPortal(
         <div
           className="confirm-modal-overlay"
           onClick={(e) => {
@@ -319,7 +320,8 @@ export default function WelcomeScreen({ onStartChallenge }) {
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
