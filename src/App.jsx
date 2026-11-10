@@ -117,9 +117,7 @@ export default function App() {
 
   const handlePlayAgain = () => {
     audioSystem.playClick();
-    if (audioSystem.audioElement) {
-      audioSystem.audioElement.currentTime = 0;
-    }
+    audioSystem.stopMusic();
     setScore(0);
     setCompletedLevels([]);
     sessionStorage.clear();
@@ -134,6 +132,7 @@ export default function App() {
   };
 
   const handleGoHome = () => {
+    audioSystem.stopMusic();
     scrollToPageTop();
     setCurrentScreen('welcome');
   };

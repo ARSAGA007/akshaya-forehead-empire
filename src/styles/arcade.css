@@ -213,7 +213,7 @@
   overflow: hidden;
   border: 3px solid rgba(255, 101, 163, 0.6);
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(0, 0, 0, 0.4);
-  touch-action: none;
+  touch-action: pan-y;
 }
 
 .lab-bg-img {
@@ -287,6 +287,10 @@
 .measurement-ruler:active {
   cursor: grabbing;
   box-shadow: 0 10px 25px rgba(255, 42, 133, 0.6);
+}
+
+.measurement-ruler * {
+  pointer-events: none;
 }
 
 .ruler-marks {

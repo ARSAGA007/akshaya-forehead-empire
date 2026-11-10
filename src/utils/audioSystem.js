@@ -188,6 +188,7 @@ class ArcadeAudioSystem {
     if (this.audioElement) {
       try {
         this.audioElement.pause();
+        this.audioElement.currentTime = 0;
       } catch (e) { }
     }
     if (this.musicTimer) {

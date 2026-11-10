@@ -15,6 +15,7 @@ export default function ForeheadMeasurementGame({ onCompleteLevel, onUpdateScore
   const [scanLaserY, setScanLaserY] = useState(null);
 
   const containerRef = useRef(null);
+  const rulerRef = useRef(null);
 
   // Target area: between 25% and 55%
   const targetMinY = 25;
@@ -49,10 +50,11 @@ export default function ForeheadMeasurementGame({ onCompleteLevel, onUpdateScore
     rulerYRef.current = rulerY;
   }, [rulerY]);
 
-  // Butter-smooth, non-passive touch & mouse dragging listener on container and window
+  // Butter-smooth, non-passive touch & mouse dragging listener ONLY on the ruler itself and window
   useEffect(() => {
+    const ruler = rulerRef.current;
     const container = containerRef.current;
-    if (!container) return;
+    if (!ruler || !container) return;
 
     const updatePosition = (clientY) => {
       const rect = container.getBoundingClientRect();
@@ -69,7 +71,7 @@ export default function ForeheadMeasurementGame({ onCompleteLevel, onUpdateScore
       }
     };
 
-    // Touch handlers
+    // Touch handlers - ONLY started when touching the ruler itself
     const onTouchStart = (e) => {
       if (isScanning || measurementResult) return;
       if (e.cancelable) e.preventDefault();
@@ -88,11 +90,13 @@ export default function ForeheadMeasurementGame({ onCompleteLevel, onUpdateScore
     };
 
     const onTouchEnd = () => {
-      isDraggingRef.current = false;
-      setIsDragging(false);
+      if (isDraggingRef.current) {
+        isDraggingRef.current = false;
+        setIsDragging(false);
+      }
     };
 
-    // Mouse handlers
+    // Mouse handlers - ONLY started when clicking the ruler itself
     const onMouseDown = (e) => {
       if (isScanning || measurementResult) return;
       isDraggingRef.current = true;
@@ -108,26 +112,29 @@ export default function ForeheadMeasurementGame({ onCompleteLevel, onUpdateScore
     };
 
     const onMouseUp = () => {
-      isDraggingRef.current = false;
-      setIsDragging(false);
+      if (isDraggingRef.current) {
+        isDraggingRef.current = false;
+        setIsDragging(false);
+      }
     };
 
-    container.addEventListener('touchstart', onTouchStart, { passive: false });
+    // Attach touchstart/mousedown strictly to the ruler element
+    ruler.addEventListener('touchstart', onTouchStart, { passive: false });
     window.addEventListener('touchmove', onTouchMove, { passive: false });
     window.addEventListener('touchend', onTouchEnd, { passive: false });
     window.addEventListener('touchcancel', onTouchEnd, { passive: false });
 
-    container.addEventListener('mousedown', onMouseDown);
+    ruler.addEventListener('mousedown', onMouseDown);
     window.addEventListener('mousemove', onMouseMove);
     window.addEventListener('mouseup', onMouseUp);
 
     return () => {
-      container.removeEventListener('touchstart', onTouchStart);
+      ruler.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('touchmove', onTouchMove);
       window.removeEventListener('touchend', onTouchEnd);
       window.removeEventListener('touchcancel', onTouchEnd);
 
-      container.removeEventListener('mousedown', onMouseDown);
+      ruler.removeEventListener('mousedown', onMouseDown);
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('mouseup', onMouseUp);
     };
@@ -311,6 +318,7 @@ export default function ForeheadMeasurementGame({ onCompleteLevel, onUpdateScore
 
         {/* Draggable Measuring Ruler */}
         <div
+          ref={rulerRef}
           className="measurement-ruler"
           style={{
             top: `${rulerY}%`,
